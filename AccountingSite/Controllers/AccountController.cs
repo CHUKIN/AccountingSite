@@ -48,6 +48,7 @@ namespace AccountingSite.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles="Admin")]
         public ActionResult Register(RegisterModel model)
         {
             if (ModelState.IsValid)
@@ -62,7 +63,7 @@ namespace AccountingSite.Controllers
                     // создаем нового пользователя
                     using (ManageContext db = new ManageContext())
                     {
-                        db.Employees.Add(new Employee { Login = model.Login, Password = model.Password, Role = db.Roles.Where(i => i.Name == "Employee").FirstOrDefault() });
+                        db.Employees.Add(new Employee { Login = model.Login, Password = model.Password, Role = db.Roles.Where(i => i.Name == "Admin").FirstOrDefault() });
                         db.SaveChanges();
 
                         Employee = db.Employees.Where(u => u.Login == model.Login && u.Password == model.Password).FirstOrDefault();
@@ -83,7 +84,7 @@ namespace AccountingSite.Controllers
             return View(model);
         }
 
-        public ActionResult Logoff()
+        public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
