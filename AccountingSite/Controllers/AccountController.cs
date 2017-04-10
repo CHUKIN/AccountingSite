@@ -48,6 +48,7 @@ namespace AccountingSite.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles="Admin")]
         public ActionResult Register(RegisterModel model)
         {
             if (ModelState.IsValid)
@@ -83,7 +84,7 @@ namespace AccountingSite.Controllers
             return View(model);
         }
 
-        public ActionResult Logoff()
+        public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
