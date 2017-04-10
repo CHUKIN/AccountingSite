@@ -62,7 +62,7 @@ namespace AccountingSite.Controllers
                     // создаем нового пользователя
                     using (ManageContext db = new ManageContext())
                     {
-                        db.Employees.Add(new Employee { Login = model.Login, Password = model.Password, Role = db.Roles.Where(i => i.Name == "Employee").FirstOrDefault() });
+                        db.Employees.Add(new Employee { Login = model.Login, Password = model.Password, Role = db.Roles.Where(i => i.Name == "Admin").FirstOrDefault() });
                         db.SaveChanges();
 
                         Employee = db.Employees.Where(u => u.Login == model.Login && u.Password == model.Password).FirstOrDefault();
