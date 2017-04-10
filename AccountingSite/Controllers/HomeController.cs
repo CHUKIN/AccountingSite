@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccountingSite.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,8 @@ namespace AccountingSite.Controllers
 {
     public class HomeController : Controller
     {
+        ManageContext db = new ManageContext();
+
         public ActionResult Index()
         {
             return View();
@@ -22,10 +25,10 @@ namespace AccountingSite.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            db.Statuses.Add(new Status { Name = "123" });
+            db.SaveChanges();
 
-
-            return View();
+            return Json(db.Statuses,JsonRequestBehavior.AllowGet);
         }
     }
 }
