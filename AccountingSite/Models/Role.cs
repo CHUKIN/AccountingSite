@@ -10,11 +10,11 @@ namespace AccountingSite.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public ICollection<Employee> Employies { get; set; }
+        public ICollection<Employee> Employees { get; set; }
 
         public Role()
         {
-            Employies = new List<Employee>();
+            Employees = new List<Employee>();
         }
     }
 }
