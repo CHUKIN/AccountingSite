@@ -11,26 +11,16 @@ namespace AccountingSite.Controllers
     {
         ManageContext db = new ManageContext();
 
+        [Authorize]
         public ActionResult Index()
         {
+            ViewBag.Message = $"Ваш логин = {User.Identity.Name}, Ваша роль = {User.Identity.AuthenticationType}";
             return View();
         }
 
-        [Authorize]
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
-        }
-
-        [Authorize(Roles ="Employee")]
-        public ActionResult Contact()
-        {
-            db.Statuses.Add(new Status { Name = "123" });
-            db.SaveChanges();
-
-            return Json(db.Statuses,JsonRequestBehavior.AllowGet);
         }
     }
 }
