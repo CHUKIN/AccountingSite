@@ -16,6 +16,7 @@ namespace AccountingSite.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -23,6 +24,7 @@ namespace AccountingSite.Controllers
             return View();
         }
 
+        [Authorize(Roles ="Employee")]
         public ActionResult Contact()
         {
             db.Statuses.Add(new Status { Name = "123" });

@@ -164,8 +164,10 @@
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\ItemTransaction.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ManageContext.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -208,10 +210,10 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
