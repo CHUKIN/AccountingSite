@@ -17,5 +17,10 @@ namespace AccountingSite.Controllers
             ViewBag.Message = $"Ваш логин = {User.Identity.Name}, Ваша роль = {User.Identity.AuthenticationType}";
             return View();
         }
+
+        public ActionResult About()
+        {
+            return View();
+        }
     }
 }
