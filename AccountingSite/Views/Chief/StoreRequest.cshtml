@@ -29,7 +29,84 @@
 </div>
 
 <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <form role="form">
+                    <h2>Заполнение запроса на склад</h2><br>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">От кого: </label>
+                        <div class="col-md-6">
+                            <p class="form-control-static">Начальник цеха 1</p>
+                        </div>
+                        <br><br>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Кому: </label>
+                        <div class="dropdown col-md-6">
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Кому
+                                <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <p>HTML</p>
+                                </li>
+                                <li>
+                                    <p>CSS</p>
+                                </li>
+                                <li>
+                                    <p>JavaScript</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <br><br>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label"for="text">Текст: </label>
+                        <div class="col-md-6">
+                            <textarea class="form-control" rows="3" id="text"></textarea>
+                        </div>
+                        <br>
+                    </div>
+                    <br><br><br>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Инструмент:</label>
+                        <div class="dropdown col-md-2">
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Инструмент
+                                <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <p>HTML</p>
+                                </li>
+                                <li>
+                                    <p>CSS</p>
+                                </li>
+                                <li>
+                                    <p>JavaScript</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <label class="col-md-2 control-label" for="amount">Количество:</label>
+                        <input type="text" class="form-control col-md-2" id="amount" required="" autofocus="" name="amount">
+                        <br><br>
+                        <div class="col-md-1">
+                            <button class="btn btn-success" type="submit">+</button>
+                        </div>
+                        <br><br>
+                    </div>
 
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Дата:</label>
+                        <p class="form-control-static col-md-6">@DateTime.Now</p>
+                        <br><br>
+                    </div>
+
+                    <button class="btn btn-primary" type="submit">Отправить</button>
+                </form>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
 </div>
 
 <div class="container body-content">
