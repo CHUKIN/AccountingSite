@@ -28,7 +28,7 @@ namespace AccountingSite.Controllers
             }
             if (User.IsInRole("Chief"))
             {
-                return View("~/Chief/OrderStatus");
+                return RedirectToRoute(new { controller = "Chief", action = "OrderStatus" });
             }
             return View();
         }

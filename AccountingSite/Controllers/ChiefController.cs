@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccountingSite.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,20 +9,24 @@ namespace AccountingSite.Controllers
 {
     public class ChiefController : Controller
     {
+        ManageContext db = new ManageContext();
+
         // GET: Chief
         public ActionResult OrderStatus()
         {
-            return View();
+            return View(db.Orders.Where(i=>i.From.Login==User.Identity.Name));
         }
 
         public ActionResult StoreRequest()
         {
-            return View();
+            return View(db);
         }
 
         public ActionResult ItemExtradition()
         {
-            return View();
+            return View(db);
         }
+
+        
     }
 }
