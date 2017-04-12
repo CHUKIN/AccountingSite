@@ -223,6 +223,10 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Admin.cshtml" />
+    <Content Include="Views\Home\Engineer.cshtml" />
+    <Content Include="Views\Home\Manager.cshtml" />
+    <Content Include="Views\Home\Chief.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
