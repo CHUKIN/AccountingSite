@@ -13,7 +13,7 @@ namespace AccountingSite.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201704101721441_1"; }
+            get { return "201704121420055_1"; }
         }
         
         string IMigrationMetadata.Source

@@ -14,5 +14,8 @@ namespace AccountingSite.Models
         public DbSet<Order> Orders { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Status> Statuses { get; set; }
+        public DbSet<Department> Departments { get; set; }
+
+   
     }
 }

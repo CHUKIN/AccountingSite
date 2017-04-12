@@ -18,6 +18,8 @@ namespace AccountingSite.Models
         public int RoleId { get; set; }
         public Role Role { get; set; }
 
+        public Department Department { get; set; }
+
         public ICollection<Order> Orders { get; set; }
 
         public Employee()
