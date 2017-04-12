@@ -16,7 +16,6 @@ namespace AccountingSite.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model)
         {
             if (ModelState.IsValid)

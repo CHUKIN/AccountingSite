@@ -16,19 +16,19 @@ namespace AccountingSite.Controllers
         {
             if(User.IsInRole("Admin"))
             {
-                return View("~/Views/Home/Admin.cshtml");
+                return View("~/Views/Admin/Admin");
             }
             if (User.IsInRole("Engineer"))
             {
-                return View("~/Views/Home/Engineer.cshtml");
+                return View("~/Views/Engineer/Engineer");
             }
             if (User.IsInRole("Manager"))
             {
-                return View("~/Views/Home/Manager.cshtml");
+                return View("~/Views/Manager/Manager");
             }
             if (User.IsInRole("Chief"))
             {
-                return View("~/Views/Home/Chief.cshtml");
+                return View("~/Chief/OrderStatus");
             }
             return View();
         }
