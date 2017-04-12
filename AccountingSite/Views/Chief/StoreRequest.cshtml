@@ -1,5 +1,11 @@
 ﻿@{
-    Layout = null; 
+    Layout = null;
+    if (ViewBag.Message== "Успешно добавлено!")
+    {
+        <script>
+            alert("Успешно добавлено!");
+        </script>
+    }
 }
 @model AccountingSite.Models.ManageContext
 
@@ -14,6 +20,7 @@
     @Scripts.Render("~/bundles/modernizr")
 
     <script>
+
         function addItem() {
             var txt = ` <label class="col-md-2 control-label">Инструмент:</label>
                         <div class="dropdown col-md-2">
@@ -62,7 +69,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">От кого: </label>
                         <div class="col-md-6">
-                            <p class="form-control-static">@Model.Employees.Where(i=>i.Login== User.Identity.Name).FirstOrDefault().Name</p>
+                            <p class="form-control-static">@Model.Employees.FirstOrDefault(i => i.Login== User.Identity.Name).Name</p>
                         </div>
                         <br><br>
                     </div>
@@ -72,7 +79,7 @@
 
                             <select class="form-control" id="sel" name="to">
                                 @{
-                                    foreach (var to in Model.Employees.Where(i => i.Role == Model.Roles.Where(j => j.Name == "Manager").FirstOrDefault()))
+                                    foreach (var to in Model.Employees.Where(i => i.Role == Model.Roles.FirstOrDefault(j => j.Name == "Manager")))
                                     {
                                         <option>@to.Name</option>
                                     }

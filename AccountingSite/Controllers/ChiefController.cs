@@ -26,22 +26,32 @@ namespace AccountingSite.Controllers
         [HttpPost]
         public ActionResult StoreRequest(string[] counts,string[] items, string text, string to)
         {
-            Order order = new Order()
+            var order = new Order()
             {
-                From = db.Employees.Where(i => i.Name == User.Identity.Name).FirstOrDefault(),
-                To = db.Employees.Where(i => i.Name == db.Employees.Where(j => j.Name == to).FirstOrDefault().Name).FirstOrDefault(),
+                From = db.Employees.FirstOrDefault(i => i.Login == User.Identity.Name),
+                To = db.Employees.FirstOrDefault(i => i.Name == db.Employees.FirstOrDefault(j => j.Name == to).Name),
                 Text = text,
                 Date = DateTime.Now,
-                Status = db.Statuses.Where(i => i.Name == "SendToStore").FirstOrDefault()
+                Status = db.Statuses.FirstOrDefault(i => i.Name == "SendToStore")
             };
 
             db.Orders.Add(order);
 
-
+            for (var i=0;i<items.Length;i++)
+            {
+                var item = new ItemTransaction()
+                {
+                    Name = items[i],
+                    Count = int.Parse(counts[i]),
+                    Order = order
+                };
+                db.ItemTransactions.Add(item);
+            }
 
 
             db.SaveChanges();
-            return Content(order.From.Name);
+            ViewBag.Message = "Успешно добавлено!";
+            return View(db);
         }
 
         public ActionResult ItemExtradition()
