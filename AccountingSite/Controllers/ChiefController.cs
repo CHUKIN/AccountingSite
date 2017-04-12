@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace AccountingSite.Controllers
 {
+    [Authorize(Roles="Chief")]
     public class ChiefController : Controller
     {
         ManageContext db = new ManageContext();
