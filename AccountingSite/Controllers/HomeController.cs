@@ -14,7 +14,22 @@ namespace AccountingSite.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            ViewBag.Message = $"Ваш логин = {User.Identity.Name}, Ваша роль = {User.Identity.AuthenticationType}";
+            if(User.IsInRole("Admin"))
+            {
+                return View("~/Views/Home/Admin.cshtml");
+            }
+            if (User.IsInRole("Engineer"))
+            {
+                return View("~/Views/Home/Engineer.cshtml");
+            }
+            if (User.IsInRole("Manager"))
+            {
+                return View("~/Views/Home/Manager.cshtml");
+            }
+            if (User.IsInRole("Chief"))
+            {
+                return View("~/Views/Home/Chief.cshtml");
+            }
             return View();
         }
 
