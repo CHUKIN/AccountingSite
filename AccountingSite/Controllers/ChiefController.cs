@@ -28,7 +28,7 @@ namespace AccountingSite.Controllers
         {
             Order order = new Order()
             {
-                From = db.Employees.Where(i => i.Name == User.Identity.Name).FirstOrDefault(),
+                From = db.Employees.Where(i => i.Login == User.Identity.Name).FirstOrDefault(),
                 To = db.Employees.Where(i => i.Name == db.Employees.Where(j => j.Name == to).FirstOrDefault().Name).FirstOrDefault(),
                 Text = text,
                 Date = DateTime.Now,
@@ -37,11 +37,23 @@ namespace AccountingSite.Controllers
 
             db.Orders.Add(order);
 
+            ItemTransaction item;
 
+            for (int i=0;i<items.Length;i++)
+            {
+                item = new ItemTransaction()
+                {
+                    Name = items[i],
+                    Count = int.Parse(counts[i]),
+                    Order = order
+                };
+                db.ItemTransactions.Add(item);
+            }
 
 
             db.SaveChanges();
-            return Content(order.From.Name);
+            ViewBag.Message = "Успешно добавлено!";
+            return View(db);
         }
 
         public ActionResult ItemExtradition()

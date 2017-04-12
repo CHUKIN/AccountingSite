@@ -1,5 +1,11 @@
 ﻿@{
-    Layout = null; 
+    Layout = null;
+    if (ViewBag.Message== "Успешно добавлено!")
+    {
+        <script>
+            alert("Успешно добавлено!");
+        </script>
+    }
 }
 @model AccountingSite.Models.ManageContext
 
@@ -14,6 +20,7 @@
     @Scripts.Render("~/bundles/modernizr")
 
     <script>
+
         function addItem() {
             var txt = ` <label class="col-md-2 control-label">Инструмент:</label>
                         <div class="dropdown col-md-2">
