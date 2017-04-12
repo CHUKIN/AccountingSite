@@ -17,21 +17,25 @@
     <div class="container">
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Запрос на склад", "StoreRequest", "Chief")</li>
+                <li class="active">@Html.ActionLink("Запрос на склад", "StoreRequest", "Chief")</li>
                 <li>@Html.ActionLink("Выдача инвентаря", "ItemExtradition", "Chief")</li>
                 <li>@Html.ActionLink("Статус заказов", "OrderStatus", "Chief")</li>
             </ul>
-            <ul class="nav navbar-nav pull-right">
-                <li><p>Начальник цеха</p></li>
-            </ul>
+            <form class="navbar-form navbar-right" role="form">
+                <button type="submit" class="btn btn-success">Выйти</button>
+            </form>
         </div>
     </div>
+</div>
+
+<div class="container">
+
 </div>
 
 <div class="container body-content">
     <hr />
     <footer>
-        <p>
+        <p class="text-center">
             <a href="#">Наверх</a>
         </p>
     </footer>
@@ -39,6 +43,5 @@
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", required: false)
 </body>
 </html>

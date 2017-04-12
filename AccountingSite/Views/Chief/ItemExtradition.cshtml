@@ -1,7 +1,47 @@
-﻿
-@{
-    ViewBag.Title = "ItemExtradition";
+﻿@{
+    Layout = null;
 }
 
-<h2>ItemExtradition</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выдача инвентаря</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Запрос на склад", "StoreRequest", "Chief")</li>
+                <li class="active">@Html.ActionLink("Выдача инвентаря", "ItemExtradition", "Chief")</liclass>
+                <li>@Html.ActionLink("Статус заказов", "OrderStatus", "Chief")</li>
+            </ul>
+            <form class="navbar-form navbar-right" role="form">
+                <button type="submit" class="btn btn-success">Выйти</button>
+            </form>
+        </div>
+    </div>
+</div>
 
+<div class="container">
+
+</div>
+
+<div class="container body-content">
+    <hr />
+    <footer>
+        <p class="text-center">
+            <a href="#">Наверх</a>
+        </p>
+    </footer>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>
