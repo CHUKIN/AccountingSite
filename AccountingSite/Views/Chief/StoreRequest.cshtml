@@ -64,12 +64,12 @@
         <div class="col-md-12">
             <div class="col-md-2"></div>
             <div class="col-md-8">
+                <h2 class="text-center">Заполнение запроса на склад</h2><br>
                 <form role="form" method="post" action="/Chief/StoreRequest">
-                    <h2>Заполнение запроса на склад</h2><br>
                     <div class="form-group">
                         <label class="col-md-2 control-label">От кого: </label>
                         <div class="col-md-6">
-                            <p class="form-control-static">@Model.Employees.Where(i=>i.Login== User.Identity.Name).FirstOrDefault().Name</p>
+                            <p class="form-control-static">@Model.Employees.FirstOrDefault(i => i.Login == User.Identity.Name).Name</p>
                         </div>
                         <br><br>
                     </div>
@@ -79,14 +79,14 @@
 
                             <select class="form-control" id="sel" name="to">
                                 @{
-                                    foreach (var to in Model.Employees.Where(i => i.Role == Model.Roles.Where(j => j.Name == "Manager").FirstOrDefault()))
+                                    foreach (var to in Model.Employees.Where(i => i.Role == Model.Roles.FirstOrDefault(j => j.Name == "Manager")))
                                     {
                                         <option>@to.Name</option>
                                     }
                                 }
 
                             </select>
-</div>
+                        </div>
                         <br><br>
                     </div>
                     <div class="form-group">
@@ -97,7 +97,7 @@
                         <br>
                     </div>
                     <br><br><br>
-                    <div  id="items">
+                    <div id="items">
                         <label class="col-md-2 control-label">Инструмент:</label>
                         <div class="dropdown col-md-2">
                             <select class="form-control" id="sel1", name="items">
@@ -116,17 +116,17 @@
                     </div>
 
                     <div class="form-group">
-                        
+
                         <div class="col-md-1">
                             <button class="btn btn-success" type="button" onclick="addItem()">+</button>
                         </div>
-                        <br><br>
+                        <br><br><br>
                         <label class="col-md-2 control-label">Дата:</label>
                         <p class="form-control-static col-md-6">@DateTime.Now</p>
                         <br><br>
                     </div>
 
-                    <button class="btn btn-primary" type="submit">Отправить</button>
+                    <button class="btn btn-primary center-block" type="submit">Отправить</button>
                 </form>
             </div>
             <div class="col-md-2"></div>
