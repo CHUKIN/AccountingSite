@@ -1,7 +1,107 @@
-﻿
-@{
-    ViewBag.Title = "Index2";
+﻿@{
+    Layout = null;
 }
 
-<h2>Index2</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Возврат инвентаря</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Список полученных заказов инвентаря", "Index1", "Engineer")</li>
+                <li class="active">@Html.ActionLink("Возврат инвентаря", "Index2", "Engineer")</li>
+            </ul>
+            <form class="navbar-form navbar-right" role="form" method="get" action="/Account/LogOff">
+                <button type="submit" class="btn btn-success">Выйти</button>
+            </form>
+        </div>
+    </div>
+</div>
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <h2>  Возврат инвентаря</h2><br>
+                <form role="form" class="center-block">
+                    <div class="form-group">
+                        <label>Заказ:</label>
+                        <div class="dropdown">
+                            <select class="form-control" id="sel" name="Id" onchange='show()'>
+                                <option >1</option>
+                                <option >2</option>
+
+
+                                @*                                @foreach (var order in Model.Orders.Where(i => i.Status == Model.Statuses.FirstOrDefault(j => j.Name == "Ожидает назначения")))*@
+                                @*                                {*@
+                                @*                                    <option >@order.Text</option>*@
+                                @**@
+                                @**@
+                                @*                                }*@
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Причина возврата:</label>
+                        <div class="dropdown">
+                            <select class="form-control">
+                                <option >Text1</option>
+                                <option >Text2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>От кого: </label>
+                        <p class="form-control-static">Иванов</p>
+                    </div>
+                    <div class="form-group">
+                        <label>Кому:</label>
+                        <div class="dropdown">
+                            <select class="form-control" id="sel1" name="To">
+                                <option >Text1</option>
+                                <option >Text2</option>
+                                @*                                @{*@
+                                @*                                    foreach (var employee in Model.Employees.Where(i => i.Role == Model.Roles.FirstOrDefault(j => j.Name == "Engineer")))*@
+                                @*                                    {*@
+                                @*                                        <option>@employee.Name</option>*@
+                                @*                                    }*@
+                                @*                                }*@
+
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Отправить</button>
+                    <br><br>
+                </form>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+
+</div>
+
+<div class="container body-content">
+    <hr />
+    <footer>
+        <p class="text-center">
+            <a href="#">Наверх</a>
+        </p>
+    </footer>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>
