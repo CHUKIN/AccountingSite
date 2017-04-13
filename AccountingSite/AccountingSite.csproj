@@ -232,11 +232,12 @@
     <Content Include="Views\Chief\StoreRequest.cshtml" />
     <Content Include="Views\Chief\ItemExtradition.cshtml" />
     <Content Include="Views\Chief\OrderStatus.cshtml" />
+    <Content Include="Views\Engineer\Index1.cshtml" />
+    <Content Include="Views\Engineer\Index2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Admin\" />
-    <Folder Include="Views\Engineer\" />
     <Folder Include="Views\Manager\" />
   </ItemGroup>
   <ItemGroup>

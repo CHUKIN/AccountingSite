@@ -9,7 +9,12 @@ namespace AccountingSite.Controllers
     public class EngineerController : Controller
     {
         // GET: Engineer
-        public ActionResult Index()
+        public ActionResult Index1()
+        {
+            return View();
+        }
+
+        public ActionResult Index2()
         {
             return View();
         }
