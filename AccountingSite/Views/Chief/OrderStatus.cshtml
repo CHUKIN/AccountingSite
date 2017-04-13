@@ -1,6 +1,7 @@
 ﻿@{
     Layout = null;
 }
+@model IEnumerable<AccountingSite.Models.Order>
 
 <!DOCTYPE html>
 <html>
@@ -42,24 +43,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Какое-то описание</td>
-                    <td>Иванов</td>
-                    <td>Выполняется</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Какое-то описание</td>
-                    <td>Петров</td>
-                    <td>Выполнено</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Какое-то описание</td>
-                    <td>Петров1</td>
-                    <td>Выполнено</td>
-                </tr>
+                
+                    @{
+                        foreach (var order in Model)
+                        {
+                            <tr>
+                                <td>@order.Id</td>
+                                <td>@order.Text</td>
+                                <td>@(order.Employees)?.Name</td>
+                                <td>@order.Status.Name</td>
+                            </tr>
+                        }
+                    }
+               
                 </tbody>
             </table>
         </div>
