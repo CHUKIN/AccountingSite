@@ -42,23 +42,24 @@
             <div class="col-md-4">
                 <form role="form"  method="post" action="/Chief/ItemExtradition">
                     <div class="form-group">
-                        <label>Номер заказа:</label>
+                        <label>Заказ:</label>
                         <div class="dropdown">
-                            <select class="form-control" id="sel" name="Id">
+                              
                                 
-                                @{
-                                    foreach (var order in Model.Orders.Where(i=>i.Status==Model.Statuses.FirstOrDefault(j=>j.Name== "Ожидает назначения")))
+                                <select class="form-control" id="sel" name="Id" onchange='show()'>
+                                 
+                               
+                                    @foreach (var order in Model.Orders.Where(i => i.Status == Model.Statuses.FirstOrDefault(j => j.Name == "Ожидает назначения")))
                                     {
-                                        <option>@order.Id</option>
+                                        <option >@order.Text</option>
+
+
                                     }
-                                }
-                            </select>
+
+                                </select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label>Описание:</label><br>
-                        <textarea class="form-control" rows="5" disabled=""></textarea>
-                    </div>
+                   
                     <div class="form-group">
                         <label>Ответственный:</label>
                         <div class="dropdown">
