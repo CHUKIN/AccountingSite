@@ -8,8 +8,6 @@ namespace AccountingSite.Models
     public class Order
     {
         public int Id { get; set; }
-        // public string From { get; set; }
-        // public string To { get; set; }
          public Employee From { get; set; }
          public Employee To { get; set; }
         public string Text { get; set; }
