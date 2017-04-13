@@ -51,8 +51,8 @@
                 <li class="active">@Html.ActionLink("Запрос на склад", "StoreRequest", "Chief")</li>
                 <li>@Html.ActionLink("Выдача инвентаря", "ItemExtradition", "Chief")</li>
                 <li>@Html.ActionLink("Статус заказов", "OrderStatus", "Chief")</li>
-            </ul>
-            <form class="navbar-form navbar-right" role="form">
+            </ul> 
+            <form class="navbar-form navbar-right" role="form" method="get" action="/Account/LogOff">
                 <button type="submit" class="btn btn-success">Выйти</button>
             </form>
         </div>

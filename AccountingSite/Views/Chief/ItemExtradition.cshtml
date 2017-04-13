@@ -1,7 +1,13 @@
 ﻿@{
     Layout = null;
+    if (ViewBag.Message == "Успешно добавлено!")
+    {
+        <script>
+            alert("Успешно добавлено!");
+        </script>
+    }
 }
-
+@model AccountingSite.Models.ManageContext
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +27,7 @@
                 <li class="active">@Html.ActionLink("Выдача инвентаря", "ItemExtradition", "Chief")</li>
                 <li>@Html.ActionLink("Статус заказов", "OrderStatus", "Chief")</li>
             </ul>
-            <form class="navbar-form navbar-right" role="form">
+            <form class="navbar-form navbar-right" role="form" method="get" action="/Account/LogOff">
                 <button type="submit" class="btn btn-success">Выйти</button>
             </form>
         </div>
@@ -34,20 +40,18 @@
             <h2 class="text-center">Выдача инвентаря и назначение ответственного</h2><br>
             <div class="col-md-4"></div>
             <div class="col-md-4">
-                <form role="form">
+                <form role="form"  method="post" action="/Chief/ItemExtradition">
                     <div class="form-group">
                         <label>Номер заказа:</label>
                         <div class="dropdown">
-                            <select class="form-control" id="sel" name="to">
-                                <option>1</option>
-                                <option>2</option>
-                                @*                                @{*@
-                                @*                                    foreach (var to in Model.Employees.Where(i => i.Role == Model.Roles.Where(j => j.Name == "Manager").FirstOrDefault()))*@
-                                @*                                    {*@
-                                @*                                        <option>@to.Name</option>*@
-                                @*                                    }*@
-                                @*                                }*@
-
+                            <select class="form-control" id="sel" name="Id">
+                                
+                                @{
+                                    foreach (var order in Model.Orders.Where(i=>i.Status==Model.Statuses.FirstOrDefault(j=>j.Name== "Ожидает назначения")))
+                                    {
+                                        <option>@order.Id</option>
+                                    }
+                                }
                             </select>
                         </div>
                     </div>
@@ -58,15 +62,13 @@
                     <div class="form-group">
                         <label>Ответственный:</label>
                         <div class="dropdown">
-                            <select class="form-control" id="sel1" name="to">
-                                <option>Иванов</option>
-                                <option>Петров</option>
-                                @*                                @{*@
-                                @*                                    foreach (var to in Model.Employees.Where(i => i.Role == Model.Roles.Where(j => j.Name == "Manager").FirstOrDefault()))*@
-                                @*                                    {*@
-                                @*                                        <option>@to.Name</option>*@
-                                @*                                    }*@
-                                @*                                }*@
+                            <select class="form-control" id="sel1" name="To">
+                                @{
+                                    foreach (var employee in Model.Employees.Where(i => i.Role == Model.Roles.FirstOrDefault(j => j.Name == "Engineer")))
+                                    {
+                                        <option>@employee.Name</option>
+                                    }
+                                }
 
                             </select>
                         </div>

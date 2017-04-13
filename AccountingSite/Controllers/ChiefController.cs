@@ -36,7 +36,8 @@ namespace AccountingSite.Controllers
                 To = db.Employees.FirstOrDefault(i => i.Name == db.Employees.FirstOrDefault(j => j.Name == to).Name),
                 Text = text,
                 Date = DateTime.Now,
-                Status = db.Statuses.FirstOrDefault(i => i.Name == "SendToStore")
+                Status = db.Statuses.FirstOrDefault(i => i.Name == "Отправлен на склад"),
+                Employee = null
             };
 
             db.Orders.Add(order);
@@ -58,11 +59,22 @@ namespace AccountingSite.Controllers
             return View(db);
         }
 
+        [HttpGet]
         public ActionResult ItemExtradition()
         {
             return View(db);
         }
 
-        
+        [HttpPost]
+        public ActionResult ItemExtradition(int Id, string To)
+        {
+            var order = db.Orders.Find(Id);
+            var employee = db.Employees.FirstOrDefault(i=>i.Name==To);
+            order.Employee = employee;
+            order.Status = db.Statuses.FirstOrDefault(i => i.Name == "Назначено");
+            ViewBag.Message = "Успешно добавлено!";
+            db.SaveChanges();
+            return View(db);
+        }
     }
 }
