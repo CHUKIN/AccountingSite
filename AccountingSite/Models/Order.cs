@@ -18,7 +18,7 @@ namespace AccountingSite.Models
         public DateTime Date { get; set; }
 
         public int EmployeeId { get; set; }
-        public Employee Employees { get; set; }
+        public Employee Employee { get; set; }
 
         public ICollection<ItemTransaction> ItemTransactions { get; set; }
 

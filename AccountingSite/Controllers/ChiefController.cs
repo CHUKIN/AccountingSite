@@ -1,6 +1,7 @@
 ﻿using AccountingSite.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -15,7 +16,9 @@ namespace AccountingSite.Controllers
         // GET: Chief
         public ActionResult OrderStatus()
         {
-            return View(db.Orders.Where(i=>i.From.Login==User.Identity.Name));
+            return View(db.Orders.Where(i => i.From.Login == User.Identity.Name)
+                .Include(i => i.Status)
+                .Include(i => i.Employee));
         }
 
         [HttpGet]
