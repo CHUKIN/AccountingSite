@@ -20,7 +20,7 @@ namespace AccountingSite.Controllers
             }
             if (User.IsInRole("Engineer"))
             {
-                return View("~/Views/Engineer/Engineer");
+                return RedirectToRoute(new { controller = "Engineer", action = "ListOrders" });
             }
             if (User.IsInRole("Manager"))
             {

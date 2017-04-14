@@ -232,8 +232,8 @@
     <Content Include="Views\Chief\StoreRequest.cshtml" />
     <Content Include="Views\Chief\ItemExtradition.cshtml" />
     <Content Include="Views\Chief\OrderStatus.cshtml" />
-    <Content Include="Views\Engineer\Index1.cshtml" />
-    <Content Include="Views\Engineer\Index2.cshtml" />
+    <Content Include="Views\Engineer\ListOrders.cshtml" />
+    <Content Include="Views\Engineer\ReturnOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

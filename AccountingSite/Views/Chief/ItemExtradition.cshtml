@@ -51,7 +51,7 @@
                                
                                     @foreach (var order in Model.Orders.Where(i => i.Status == Model.Statuses.FirstOrDefault(j => j.Name == "Ожидает назначения")))
                                     {
-                                        <option >@order.Text</option>
+                                        <option value="@order.Id">@order.Text</option>
 
 
                                     }
