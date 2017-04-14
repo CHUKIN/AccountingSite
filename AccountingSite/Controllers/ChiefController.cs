@@ -66,12 +66,14 @@ namespace AccountingSite.Controllers
         }
 
         [HttpPost]
-        public ActionResult ItemExtradition(int Id, string To)
+        public ActionResult ItemExtradition(int Id, int To)
         {
             var order = db.Orders.Find(Id);
-            var employee = db.Employees.FirstOrDefault(i=>i.Name==To);
+            var employee = db.Employees.Find(To);
             order.Employee = employee;
+            order.To = employee;
             order.Status = db.Statuses.FirstOrDefault(i => i.Name == "Назначено");
+            order.Date = DateTime.Now;
             ViewBag.Message = "Успешно добавлено!";
             db.SaveChanges();
             return View(db);

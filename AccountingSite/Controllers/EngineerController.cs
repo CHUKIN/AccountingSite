@@ -19,9 +19,25 @@ namespace AccountingSite.Controllers
             return View(db.Orders.Where(i=>i.Employee.Login==User.Identity.Name&&i.Status.Name== "Назначено").Include(i => i.ItemTransactions));
         }
 
+        [HttpGet]
         public ActionResult ReturnOrders()
         {
-            return View();
+            return View(db);
+        }
+
+        [HttpPost]
+        public ActionResult ReturnOrders(int Id, int To, string Reason, string Text)
+        {
+            var order = db.Orders.Find(Id);
+            order.Text = Text;
+            order.From=db.Employees.FirstOrDefault(i=>i.Login==User.Identity.Name);
+            order.To = db.Employees.Find(To);
+            order.Status = db.Statuses.FirstOrDefault(i => i.Name == Reason);
+            order.Date = DateTime.Now;
+            order.Employee = null;
+            db.SaveChanges();
+            ViewBag.Message = "Отправлено";
+            return View(db);
         }
     }
 }

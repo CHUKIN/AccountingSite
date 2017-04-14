@@ -1,7 +1,13 @@
 ﻿@{
     Layout = null;
+    if (ViewBag.Message == "Отправлено")
+    {
+        <script>
+            alert("Успешно отправлено");
+        </script>
+    }
 }
-
+@model AccountingSite.Models.ManageContext
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,21 +40,20 @@
             <div class="col-md-4"></div>
             <div class="col-md-4">
                 <h2>  Возврат инвентаря</h2><br>
-                <form role="form" class="center-block">
+                <form role="form" class="center-block" method="post" action="/Engineer/ReturnOrders">
                     <div class="form-group">
                         <label>Заказ:</label>
                         <div class="dropdown">
                             <select class="form-control" id="sel" name="Id" onchange='show()'>
-                                <option >1</option>
-                                <option >2</option>
+                                
 
-
-                                @*                                @foreach (var order in Model.Orders.Where(i => i.Status == Model.Statuses.FirstOrDefault(j => j.Name == "Ожидает назначения")))*@
-                                @*                                {*@
-                                @*                                    <option >@order.Text</option>*@
-                                @**@
-                                @**@
-                                @*                                }*@
+                               @{
+                                   foreach (var order in Model.Orders.Where(i=>i.Status.Name== "Назначено"))
+                                   {
+                                    <option>@order.Id</option>
+                                   }
+                            }
+                              
 
                             </select>
                         </div>
@@ -56,28 +61,33 @@
                     <div class="form-group">
                         <label>Причина возврата:</label>
                         <div class="dropdown">
-                            <select class="form-control">
-                                <option >Text1</option>
-                                <option >Text2</option>
+                            <select class="form-control" name="Reason">
+                                <option value="Брак отправка">Брак</option>
+                                <option value="Отсутствие потребности">Отсутствие потребности</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-md-2 control-label" for="text">Текст: </label>
+                        <div class="col-md-6">
+                            <textarea class="form-control" rows="3" id="text" name="Text"></textarea>
+                        </div>
+                        <br>
+                    </div>
+                    <div class="form-group">
                         <label>От кого: </label>
-                        <p class="form-control-static">Иванов</p>
+                        <p class="form-control-static">@Model.Employees.FirstOrDefault(i=>i.Login==User.Identity.Name).Name</p>
                     </div>
                     <div class="form-group">
                         <label>Кому:</label>
                         <div class="dropdown">
                             <select class="form-control" id="sel1" name="To">
-                                <option >Text1</option>
-                                <option >Text2</option>
-                                @*                                @{*@
-                                @*                                    foreach (var employee in Model.Employees.Where(i => i.Role == Model.Roles.FirstOrDefault(j => j.Name == "Engineer")))*@
-                                @*                                    {*@
-                                @*                                        <option>@employee.Name</option>*@
-                                @*                                    }*@
-                                @*                                }*@
+                                @{
+                                    foreach (var employee in Model.Employees.Where(i => i.Role == Model.Roles.FirstOrDefault(j => j.Name == "Manager")))
+                                    {
+                                        <option value="@employee.Id">@employee.Name</option>
+                                    }
+                                }
 
                             </select>
                         </div>
