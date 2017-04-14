@@ -1,7 +1,127 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    Layout = null;
 }
+@model IEnumerable<AccountingSite.Models.Order>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список возвратов инвентаря</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">@Html.ActionLink("Список возвратов инвентаря", "Index", "Manager")</li>
+            </ul>
+            <form class="navbar-form navbar-right" role="form" method="get" action="/Account/LogOff">
+                <button type="submit" class="btn btn-success">Выйти</button>
+            </form>
+        </div>
+    </div>
+</div>
 
-<h2>Index</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center">Список возвратов инвентаря</h2><br>
 
+
+            <table class="table table-bordered">
+
+                <thead>
+                <tr>
+                    <th rowspan="2" class="text-center">Номер заказа</th>
+                    <th rowspan="2" class="text-center">Описание</th>
+                    <th colspan="2" class="text-center">Инвентарь</th>
+                    <th rowspan="2" class="text-center">От кого</th>
+                    <th rowspan="2" class="text-center">Причина возврата</th>
+                    <th rowspan="2" class="text-center">Дата</th>
+                    <th rowspan="2"></th>
+                </tr>
+                <tr>
+                    <th class="text-center">Название</th>
+                    <th class="text-center">Количество</th>
+                </tr>
+                </thead>
+
+
+                <tbody>
+
+                <tr>
+
+                    <td rowspan="2">Номер заказа</td>
+                    <td rowspan="2">Описание</td>
+                    <td>Инвентарь</td>
+                    <td>1</td>
+                    <td rowspan="2">От кого</td>
+                    <td rowspan="2">Причина возврата</td>
+                    <td rowspan="2">Дата</td>
+
+                    <td rowspan="2">
+                        <form class="text-center" role="form">
+                            <button type="submit" class="btn btn-success">Вернуть на склад</button>
+                        </form>
+                        <br>
+                        <form class="text-center" role="form">
+                            <button type="submit" class="btn btn-success">Утилизиролвать</button>
+                        </form>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>Название</td>
+                    <td>Количество</td>
+                </tr>
+
+
+                @*                @{*@
+                @*                    foreach (var order in Model)*@
+                @*                    {*@
+                @*                        <tr>*@
+                @*                            <td rowspan="@order.ItemTransactions.Count">@order.Id</td>*@
+                @*                            <td rowspan="@order.ItemTransactions.Count">@order.Text</td>*@
+                @*                            <td>@order.ItemTransactions.First().Name</td>*@
+                @*                            <td>@order.ItemTransactions.First().Count</td>*@
+                @*                            <td rowspan="@order.ItemTransactions.Count">@order.Date</td>*@
+                @*                        </tr>*@
+                @*                        foreach (var item in order.ItemTransactions.Skip(1))*@
+                @*                        {*@
+                @*                            <tr>*@
+                @*                                <td>@item.Name</td>*@
+                @*                                <td>@item.Count</td>*@
+                @*                            </tr>*@
+                @*                        }*@
+                @*                    }*@
+                @*                }*@
+
+
+
+
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<div class="container body-content">
+    <hr/>
+    <footer>
+        <p class="text-center">
+            <a href="#">Наверх</a>
+        </p>
+    </footer>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>
