@@ -234,7 +234,7 @@
     <Content Include="Views\Chief\OrderStatus.cshtml" />
     <Content Include="Views\Engineer\ListOrders.cshtml" />
     <Content Include="Views\Engineer\ReturnOrders.cshtml" />
-    <Content Include="Views\Manager\Index.cshtml" />
+    <Content Include="Views\Manager\ListReturnItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

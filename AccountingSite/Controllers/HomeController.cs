@@ -24,7 +24,7 @@ namespace AccountingSite.Controllers
             }
             if (User.IsInRole("Manager"))
             {
-                return RedirectToRoute(new { controller = "Manager", action = "Index" });
+                return RedirectToRoute(new { controller = "Manager", action = "ListReturnItem" });
             }
             if (User.IsInRole("Chief"))
             {
