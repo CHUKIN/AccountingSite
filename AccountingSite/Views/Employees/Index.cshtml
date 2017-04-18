@@ -38,7 +38,6 @@
 
             <table class="table">
                 <tr>
-                    <th>Цех</th>
                     <th>Название роли</th>
                     <th>Логин</th>
                     <th>Пароль</th>
@@ -49,9 +48,6 @@
 
                 @foreach (var item in Model) {
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Department.Name)
-                        </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Role.Name)
                         </td>
