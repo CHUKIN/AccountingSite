@@ -30,6 +30,7 @@
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("Список возвратов инвентаря", "ListReturnItem", "Manager")</li>
                 <li class="active">@Html.ActionLink("Заказы инвентаря", "SendItem", "Manager")</li>
+                <li>@Html.ActionLink("Управление инвентарем", "Index", "Items")</li>
             </ul>
             <form class="navbar-form navbar-right" role="form" method="get" action="/Account/LogOff">
                 <button type="submit" class="btn btn-success">Выйти</button>

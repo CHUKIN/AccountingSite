@@ -19,6 +19,7 @@
             <ul class="nav navbar-nav">
                 <li class="active">@Html.ActionLink("Список возвратов инвентаря", "ListReturnItem", "Manager")</li>
                 <li>@Html.ActionLink("Заказы инвентаря", "SendItem", "Manager")</li>
+                <li>@Html.ActionLink("Управление инвентарем", "Index", "Items")</li>
             </ul>
             <form class="navbar-form navbar-right" role="form" method="get" action="/Account/LogOff">
                 <button type="submit" class="btn btn-success">Выйти</button>
@@ -54,48 +55,39 @@
 
                 <tbody>
 
+                @{
+                    foreach (var order in Model)
+                    {
+                        <tr>
+                            <td rowspan="@order.ItemTransactions.Count">@order.Id</td>
+                            <td rowspan="@order.ItemTransactions.Count">@order.Text</td>
+                            <td>@order.ItemTransactions.First().Name</td>
+                            <td>@order.ItemTransactions.First().Count</td>
 
+                            <td rowspan="@order.ItemTransactions.Count">@order.From.Name</td>
+                            <td rowspan="@order.ItemTransactions.Count">@order.Status.Name</td>
+                            <td rowspan="@order.ItemTransactions.Count">@order.Date</td>
 
-                                @{
-                                    foreach (var order in Model)
-                                    {
-                                        <tr>
-                                            <td rowspan="@order.ItemTransactions.Count">@order.Id</td>
-                                            <td rowspan="@order.ItemTransactions.Count">@order.Text</td>
-                                            <td>@order.ItemTransactions.First().Name</td>
-                                            <td>@order.ItemTransactions.First().Count</td>
-                                            
-                                            <td rowspan="@order.ItemTransactions.Count">@order.From.Name</td>
-                                            <td rowspan="@order.ItemTransactions.Count">@order.Status.Name</td>
-                                            <td rowspan="@order.ItemTransactions.Count">@order.Date</td>
+                            <td rowspan="@order.ItemTransactions.Count">
+                                <form class="text-center" role="form" method="post" action="/Manager/RestoreItem">
+                                    <button type="submit" class="btn btn-success" name="Id" value="@order.Id">Вернуть на склад</button>
+                                </form>
+                                <br>
+                                <form class="text-center" role="form" method="post" action="/Manager/DeleteItem">
+                                    <button type="submit" class="btn btn-success" name="Id" value="@order.Id">Утилизиролвать</button>
+                                </form>
+                            </td>
 
-                                            <td rowspan="@order.ItemTransactions.Count">
-                                                <form class="text-center" role="form" method="post" action="/Manager/RestoreItem">
-                                                    <button type="submit" class="btn btn-success" name="Id" value="@order.Id" >Вернуть на склад</button>
-                                                </form>
-                                                <br>
-                                                <form class="text-center" role="form" method="post" action="/Manager/DeleteItem">
-                                                    <button type="submit" class="btn btn-success" name="Id" value="@order.Id">Утилизиролвать</button>
-                                                </form>
-                                            </td>
-
-                                       </tr>
-                                        foreach (var item in order.ItemTransactions.Skip(1))
-                                        {
-                                            <tr>
-                                                <td>@item.Name</td>
-                                                <td>@item.Count</td>
-                                            </tr>
-                                            }
-                                        }
-
-                                    }
-
-
-
-
-
-
+                        </tr>
+                        foreach (var item in order.ItemTransactions.Skip(1))
+                        {
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>@item.Count</td>
+                            </tr>
+                        }
+                    }
+                }
 
                 </tbody>
 
