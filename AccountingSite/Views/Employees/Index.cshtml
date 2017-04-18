@@ -1,63 +1,102 @@
-﻿@model IEnumerable<AccountingSite.Models.Employee>
-
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    Layout = null;
 }
+@model IEnumerable<AccountingSite.Models.Employee>
 
-<h2>Index</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Аккаунты пользователей</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">@Html.ActionLink("Аккаунты пользователей", "Index", "Employees")</li>
+            </ul>
+            <form class="navbar-form navbar-right" role="form" method="get" action="/Account/LogOff">
+                <button type="submit" class="btn btn-success">Выйти</button>
+            </form>
+        </div>
+    </div>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Department.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Role.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Login)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Age)
-        </th>
-        <th></th>
-    </tr>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center">Аккаунты пользователей</h2><br>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Department.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Role.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Login)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Age)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+            <p>
+                @Html.ActionLink("Добавить пользователя", "Create")
+            </p>
 
-</table>
+            <table class="table">
+                <tr>
+                    <th>Цех</th>
+                    <th>Название роли</th>
+                    <th>Логин</th>
+                    <th>Пароль</th>
+                    <th>Имя</th>
+                    <th>Возраст</th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model) {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Department.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Role.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Login)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Password)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Age)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Редактирование", "Edit", new { id=item.Id }) |
+                            @Html.ActionLink("Удаление", "Delete", new { id=item.Id })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<div class="container body-content">
+    <hr/>
+    <footer>
+        <p class="text-center">
+            <a href="#">Наверх</a>
+        </p>
+    </footer>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>
+
+
+
+
+
+
+
+
