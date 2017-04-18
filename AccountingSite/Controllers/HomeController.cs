@@ -16,7 +16,7 @@ namespace AccountingSite.Controllers
         {
             if(User.IsInRole("Admin"))
             {
-                return View("~/Views/Admin/Admin");
+                return RedirectToRoute(new { controller = "Employees", action = "Index" });
             }
             if (User.IsInRole("Engineer"))
             {

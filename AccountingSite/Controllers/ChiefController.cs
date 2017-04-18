@@ -71,6 +71,7 @@ namespace AccountingSite.Controllers
             var order = db.Orders.Find(Id);
             var employee = db.Employees.Find(To);
             order.Employee = employee;
+            order.From = db.Employees.FirstOrDefault(i => i.Login == User.Identity.Name);
             order.To = employee;
             order.Status = db.Statuses.FirstOrDefault(i => i.Name == "Назначено");
             order.Date = DateTime.Now;

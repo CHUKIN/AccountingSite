@@ -69,12 +69,12 @@
                                             <td rowspan="@order.ItemTransactions.Count">@order.Date</td>
 
                                             <td rowspan="@order.ItemTransactions.Count">
-                                                <form class="text-center" role="form">
-                                                    <button type="submit" class="btn btn-success">Вернуть на склад</button>
+                                                <form class="text-center" role="form" method="post" action="/Manager/RestoreItem">
+                                                    <button type="submit" class="btn btn-success" name="Id" value="@order.Id" >Вернуть на склад</button>
                                                 </form>
                                                 <br>
-                                                <form class="text-center" role="form">
-                                                    <button type="submit" class="btn btn-success">Утилизиролвать</button>
+                                                <form class="text-center" role="form" method="post" action="/Manager/DeleteItem">
+                                                    <button type="submit" class="btn btn-success" name="Id" value="@order.Id">Утилизиролвать</button>
                                                 </form>
                                             </td>
 
