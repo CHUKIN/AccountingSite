@@ -32,14 +32,20 @@ namespace AccountingSite.Controllers
             if (permission)
             {
                 Order order = db.Orders.Find(id);
-                order.Status = db.Statuses.FirstOrDefault(i=>i.Name=="Ожидает назначения");
+                
                 foreach(var item in order.ItemTransactions)
                 {
                     db.Items.FirstOrDefault(i=>i.Name==item.Name).Count-=item.Count;
+                    if (db.Items.FirstOrDefault(i => i.Name == item.Name).Count <0)
+                    {
+                        ViewBag.Message = "Нет данного количества";
+                        return View(db.Orders.Where(i => i.To.Login == User.Identity.Name && i.Status.Name == "Отправлен на склад"));
+                    }
                 }
+                order.Status = db.Statuses.FirstOrDefault(i => i.Name == "Ожидает назначения");
                 order.To = order.From;
                 order.From = db.Employees.FirstOrDefault(i=>i.Login==User.Identity.Name);
-                
+                db.SaveChanges();
             }
             else
             {
@@ -48,7 +54,7 @@ namespace AccountingSite.Controllers
                 order.To = order.From;
                 order.From = db.Employees.FirstOrDefault(i => i.Login == User.Identity.Name);
             }
-            db.SaveChanges();
+            
             return View(db.Orders.Where(i => i.To.Login == User.Identity.Name && i.Status.Name == "Отправлен на склад"));
         }
 

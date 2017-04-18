@@ -1,6 +1,12 @@
 ﻿
 @{
     ViewBag.Title = "SendItem";
+    if (ViewBag.Message== "Нет данного количества")
+    {
+        <script>
+            alert("@ViewBag.Message");
+        </script>
+    }
 }
 @model IEnumerable<AccountingSite.Models.Order>
 <h2>SendItem</h2>
