@@ -1,40 +1,71 @@
-﻿@model AccountingSite.Models.Item
-
-@{
-    ViewBag.Title = "Delete";
+﻿@{
+    Layout = null;
 }
+@model AccountingSite.Models.Item
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Item</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Count)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Count)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление инвентарем</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Список возвратов инвентаря", "ListReturnItem", "Manager")</li>
+                <li>@Html.ActionLink("Заказы инвентаря", "SendItem", "Manager")</li>
+                <li>@Html.ActionLink("Управление инвентарем", "Index", "Items")</li>
+            </ul>
+            <form class="navbar-form navbar-right" role="form" method="get" action="/Account/LogOff">
+                <button type="submit" class="btn btn-success">Выйти</button>
+            </form>
         </div>
-    }
+    </div>
 </div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center">Удаление</h2><br>
+            <h3>Вы уверены, что хотите удалить?</h3>
+            <div>
+                <hr>
+                <dl class="dl-horizontal">
+                    <dt>Название</dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Name)
+                    </dd>
+                    <dt>Количество</dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Count)
+                    </dd>
+                </dl>
+
+                <div>
+                    <button type="submit" class="btn btn-default">Удалить</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container body-content">
+    <hr/>
+    <footer>
+        <p class="text-center">
+            <a href="#">Наверх</a>
+        </p>
+    </footer>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>
