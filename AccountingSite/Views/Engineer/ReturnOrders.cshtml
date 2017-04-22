@@ -50,7 +50,7 @@
                                @{
                                    foreach (var order in Model.Orders.Where(i=>i.Status.Name== "Назначено"))
                                    {
-                                    <option>@order.Id</option>
+                                    <option value="@order.Id">@order.Text</option>
                                    }
                             }
                               
@@ -70,7 +70,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="text">Текст: </label>
                         <div class="col-md-6">
-                            <textarea class="form-control" rows="3" id="text" name="Text"></textarea>
+                            <textarea class="form-control" rows="3" id="text" name="text"></textarea>
                         </div>
                         <br>
                     </div>

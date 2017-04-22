@@ -23,39 +23,39 @@ namespace AccountingSite.Controllers
         [HttpGet]
         public ActionResult SendItem()
         {
-            return View(db.Orders.Where(i=>i.To.Login==User.Identity.Name&&i.Status.Name== "Отправлен на склад"));
+            return View(db.Orders.Where(i=>i.To.Login==User.Identity.Name&&i.Status.Name== "Отправлен на склад").Include(i=>i.ItemTransactions).Include(i => i.From).Include(i => i.Status).Include(i => i.To));
         }
 
         [HttpPost]
         public ActionResult SendItem(int id,bool permission)
         {
+            var order = db.Orders.Where(i=>i.Id==id).Include(i => i.ItemTransactions).FirstOrDefault();
             if (permission)
             {
-                Order order = db.Orders.Find(id);
-                
+
                 foreach(var item in order.ItemTransactions)
                 {
-                    db.Items.FirstOrDefault(i=>i.Name==item.Name).Count-=item.Count;
+                    db.Items.FirstOrDefault(i => i.Name == item.Name).Count -= item.Count;
                     if (db.Items.FirstOrDefault(i => i.Name == item.Name).Count <0)
                     {
                         ViewBag.Message = "Нет данного количества";
-                        return View(db.Orders.Where(i => i.To.Login == User.Identity.Name && i.Status.Name == "Отправлен на склад"));
+                        return View(db.Orders.Where(i => i.To.Login == User.Identity.Name && i.Status.Name == "Отправлен на склад").Include(i => i.ItemTransactions).Include(i => i.From).Include(i => i.Status).Include(i => i.To));
                     }
                 }
                 order.Status = db.Statuses.FirstOrDefault(i => i.Name == "Ожидает назначения");
-                order.To = order.From;
-                order.From = db.Employees.FirstOrDefault(i=>i.Login==User.Identity.Name);
-                db.SaveChanges();
+
             }
             else
             {
-                Order order = db.Orders.Find(id);
                 order.Status = db.Statuses.FirstOrDefault(i => i.Name == "Отказ");
-                order.To = order.From;
-                order.From = db.Employees.FirstOrDefault(i => i.Login == User.Identity.Name);
+              
+                
             }
-            
-            return View(db.Orders.Where(i => i.To.Login == User.Identity.Name && i.Status.Name == "Отправлен на склад"));
+
+            order.To = db.Employees.Find(order.FromId);
+            order.From = db.Employees.FirstOrDefault(i => i.Login == User.Identity.Name);
+            db.SaveChanges();
+            return View(db.Orders.Where(i => i.To.Login == User.Identity.Name && i.Status.Name == "Отправлен на склад").Include(i => i.ItemTransactions).Include(i => i.From).Include(i => i.Status).Include(i => i.To));
         }
 
         [HttpPost]
@@ -67,10 +67,10 @@ namespace AccountingSite.Controllers
             return RedirectToRoute(new { controller = "Manager", action = "ListReturnItem" });
         }
 
-        [HttpPost]   ////Прочекать эти два метода
+        [HttpPost]   
         public ActionResult RestoreItem(int id)
         {
-            Order order = db.Orders.FirstOrDefault(i => i.Id == id);
+            var order = db.Orders.Where(i => i.Id == id).Include(i => i.ItemTransactions).FirstOrDefault();
             order.Status = db.Statuses.FirstOrDefault(i => i.Name == "Возвращён");
 
             foreach(var item in order.ItemTransactions)

@@ -10,6 +10,14 @@ namespace AccountingSite.Models
     public class Order
     {
         public int Id { get; set; }
+
+
+        public int FromId { get; set; }
+
+
+        public int ToId { get; set; }
+
+
          public Employee From { get; set; }
          public Employee To { get; set; }
         public string Text { get; set; }

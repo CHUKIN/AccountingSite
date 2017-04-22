@@ -49,7 +49,6 @@ namespace AccountingSite.Controllers
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Login,Password,Name,Age,RoleId")] Employee employee)
         {
             if (ModelState.IsValid)
@@ -85,7 +84,6 @@ namespace AccountingSite.Controllers
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Login,Password,Name,Age,RoleId")] Employee employee)
         {
             if (ModelState.IsValid)
@@ -106,7 +104,7 @@ namespace AccountingSite.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
+            Employee employee = db.Employees.Where(i => i.Id == id).Include(i => i.Role).FirstOrDefault();
             if (employee == null)
             {
                 return HttpNotFound();
@@ -116,7 +114,6 @@ namespace AccountingSite.Controllers
 
         // POST: Employees/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Employee employee = db.Employees.Find(id);

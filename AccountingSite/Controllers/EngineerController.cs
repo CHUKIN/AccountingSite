@@ -26,10 +26,10 @@ namespace AccountingSite.Controllers
         }
 
         [HttpPost]
-        public ActionResult ReturnOrders(int Id, int To, string Reason, string Text)
+        public ActionResult ReturnOrders(int Id, int To, string Reason, string text)
         {
             var order = db.Orders.Find(Id);
-            order.Text = Text;
+            order.Text = text;
             order.From=db.Employees.FirstOrDefault(i=>i.Login==User.Identity.Name);
             order.To = db.Employees.Find(To);
             order.Status = db.Statuses.FirstOrDefault(i => i.Name == Reason);

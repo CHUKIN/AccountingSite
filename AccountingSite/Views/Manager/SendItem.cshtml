@@ -76,17 +76,17 @@
 
                             <td rowspan="@order.ItemTransactions.Count">@order.From.Name</td>
                             @*тут нужно статус на кому поменять*@
-                            <td rowspan="@order.ItemTransactions.Count">@order.Status.Name</td>
+                            <td rowspan="@order.ItemTransactions.Count">@order.To.Name</td>
                             <td rowspan="@order.ItemTransactions.Count">@order.Date</td>
 
                             @*а тут действие для кнопочек*@
                             <td rowspan="@order.ItemTransactions.Count">
-                                <form class="text-center" role="form" method="post" action="">
-                                    <button type="submit" class="btn btn-success" name="Id" value="@order.Id">Отправить</button>
+                                <form class="text-center" role="form" method="post" action="/Manager/SendItem/@order.Id" >
+                                    <button type="submit" class="btn btn-success" name="permission" value="true" >Отправить</button>
                                 </form>
                                 <br>
-                                <form class="text-center" role="form" method="post" action="">
-                                    <button type="submit" class="btn btn-success" name="Id" value="@order.Id">Отказать</button>
+                                <form class="text-center" role="form" method="post" action="/Manager/SendItem/@order.Id" >
+                                    <button type="submit" class="btn btn-success" name="permission" value="false">Отказать</button>
                                 </form>
                             </td>
 
