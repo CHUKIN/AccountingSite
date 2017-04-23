@@ -21,6 +21,17 @@
         <div class="col-md-12">
             <div class="col-md-4"></div>
             <div class="col-md-4">
+
+                @{
+                    if (ViewBag.Message == "Пользователя с таким логином и паролем нет")
+                    {
+                        <div class="alert alert-warning">
+                            <strong>Ошибка!</strong>@ViewBag.Message;
+                        </div>
+                    }
+                }
+
+
                 <form role="form" method="post" action="/Account/Login">
                     <h2>Авторизация</h2>
                     <div class="form-group">

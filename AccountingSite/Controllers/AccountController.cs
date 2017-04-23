@@ -33,7 +33,7 @@ namespace AccountingSite.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Пользователя с таким логином и паролем нет");
+                    ViewBag.Message= "Пользователя с таким логином и паролем нет";
                 }
             }
 
