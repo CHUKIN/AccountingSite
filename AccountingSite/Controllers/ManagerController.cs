@@ -32,11 +32,6 @@ namespace AccountingSite.Controllers
         {
             Send send = new SendResult(new PositiveResult());
             
-
-
-            
-
-
             var order = db.Orders.Where(i=>i.Id==id).Include(i => i.ItemTransactions).FirstOrDefault();
             if (permission)
             {

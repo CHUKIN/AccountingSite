@@ -77,7 +77,7 @@
                         <label class="col-md-2 control-label">Кому: </label>
                         <div class="dropdown col-md-6">
 
-                            <select class="form-control" id="sel" name="to">
+                            <select class="form-control" id="sel" name="to" required="">
                                 @{
                                     foreach (var to in Model.Employees.Where(i => i.Role == Model.Roles.FirstOrDefault(j => j.Name == "Manager")))
                                     {
@@ -92,7 +92,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label"for="text">Текст: </label>
                         <div class="col-md-6">
-                            <textarea class="form-control" rows="3" id="text" name="text"></textarea>
+                            <textarea class="form-control" rows="3" id="text" name="text" required=""></textarea>
                         </div>
                         <br>
                     </div>

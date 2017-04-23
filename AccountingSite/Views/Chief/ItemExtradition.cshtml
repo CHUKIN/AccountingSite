@@ -46,7 +46,7 @@
                         <div class="dropdown">
                               
                                 
-                                <select class="form-control" id="sel" name="Id" onchange='show()'>
+                                <select class="form-control" id="sel" name="Id" onchange='show()' required="">
                                  
                                
                                     @foreach (var order in Model.Orders.Where(i => i.Status == Model.Statuses.FirstOrDefault(j => j.Name == "Ожидает назначения")))
@@ -63,7 +63,7 @@
                     <div class="form-group">
                         <label>Ответственный:</label>
                         <div class="dropdown">
-                            <select class="form-control" id="sel1" name="To">
+                            <select class="form-control" id="sel1" name="To" required="">
                                 @{
                                     foreach (var employee in Model.Employees.Where(i => i.Role == Model.Roles.FirstOrDefault(j => j.Name == "Engineer")))
                                     {

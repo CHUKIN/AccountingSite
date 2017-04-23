@@ -44,7 +44,7 @@
                     <div class="form-group">
                         <label>Заказ:</label>
                         <div class="dropdown">
-                            <select class="form-control" id="sel" name="Id" onchange='show()'>
+                            <select class="form-control" id="sel" name="Id" onchange='show()' required="">
                                 
 
                                @{
@@ -61,7 +61,7 @@
                     <div class="form-group">
                         <label>Причина возврата:</label>
                         <div class="dropdown">
-                            <select class="form-control" name="Reason">
+                            <select class="form-control" name="Reason" required="">
                                 <option value="Брак отправка">Брак</option>
                                 <option value="Отсутствие потребности">Отсутствие потребности</option>
                             </select>
@@ -70,7 +70,7 @@
                     <div class="form-group">
                         <label>Текст: </label>
                         <div>
-                            <textarea class="form-control" rows="3" id="text" name="text"></textarea>
+                            <textarea class="form-control" rows="3" id="text" name="text" required=""></textarea>
                         </div>
                     </div>
                     <div class="form-group">
@@ -80,7 +80,7 @@
                     <div class="form-group">
                         <label>Кому:</label>
                         <div class="dropdown">
-                            <select class="form-control" id="sel1" name="To">
+                            <select class="form-control" id="sel1" name="To" required="">
                                 @{
                                     foreach (var employee in Model.Employees.Where(i => i.Role == Model.Roles.FirstOrDefault(j => j.Name == "Manager")))
                                     {
