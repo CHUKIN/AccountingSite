@@ -1,4 +1,5 @@
 ﻿using AccountingSite.Models;
+using AccountingSite.Patterns;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -29,6 +30,13 @@ namespace AccountingSite.Controllers
         [HttpPost]
         public ActionResult SendItem(int id,bool permission)
         {
+            Send send = new SendResult(new PositiveResult());
+            
+
+
+            
+
+
             var order = db.Orders.Where(i=>i.Id==id).Include(i => i.ItemTransactions).FirstOrDefault();
             if (permission)
             {
@@ -38,11 +46,13 @@ namespace AccountingSite.Controllers
                     db.Items.FirstOrDefault(i => i.Name == item.Name).Count -= item.Count;
                     if (db.Items.FirstOrDefault(i => i.Name == item.Name).Count <0)
                     {
-                        ViewBag.Message = "Нет данного количества";
+                        send.Result = new NegativeResult();
+                        ViewBag.Message = send.DoWork();
                         return View(db.Orders.Where(i => i.To.Login == User.Identity.Name && i.Status.Name == "Отправлен на склад").Include(i => i.ItemTransactions).Include(i => i.From).Include(i => i.Status).Include(i => i.To));
                     }
                 }
                 order.Status = db.Statuses.FirstOrDefault(i => i.Name == "Ожидает назначения");
+                ViewBag.Message= send.DoWork();
 
             }
             else
