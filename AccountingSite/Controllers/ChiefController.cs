@@ -16,7 +16,8 @@ namespace AccountingSite.Controllers
         // GET: Chief
         public ActionResult OrderStatus()
         {
-            return View(db.Orders.Where(i => i.From.Login == User.Identity.Name|| i.To.Login == User.Identity.Name)
+            string login = UserIdentity.GetUser(User.Identity.Name).Login;
+            return View(db.Orders.Where(i => i.From.Login ==  login|| i.To.Login == login)
                 .Include(i => i.Status)
                 .Include(i => i.Employee));
         }
