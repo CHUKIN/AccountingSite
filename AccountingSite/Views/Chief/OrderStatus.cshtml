@@ -21,6 +21,7 @@
                 <li>@Html.ActionLink("Запрос на склад", "StoreRequest", "Chief")</li>
                 <li>@Html.ActionLink("Выдача инвентаря", "ItemExtradition", "Chief")</li>
                 <li class="active">@Html.ActionLink("Статус заказов", "OrderStatus", "Chief")</li>
+                <li>@Html.ActionLink("Назначение инвентаря", "SendItem", "Chief")</li>
             </ul>
             <form class="navbar-form navbar-right" role="form" method="get" action="/Account/LogOff">
                 <button type="submit" class="btn btn-success">Выйти</button>
@@ -51,14 +52,14 @@
                                 <td>@order.Id</td>
                                 <td>@order.Text</td>
                                 @{
-                                    if (order.Employee == null)
+                                    if (order.EmployeeId == 0)
                                     {
                                         <td>Не назначен</td>
                                     }
                                     else
                                     {
                                         {
-                                            <td>@order.Employee.Name</td>
+                                            <td>@order.EmployeeId</td>
                                         }
                                     }
                                 }

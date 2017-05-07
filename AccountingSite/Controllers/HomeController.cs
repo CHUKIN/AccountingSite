@@ -30,7 +30,7 @@ namespace AccountingSite.Controllers
             {
                 return RedirectToRoute(new { controller = "Chief", action = "OrderStatus" });
             }
-            return View();
+            return RedirectToRoute(new { controller = "Account", action = "Login" });
         }
 
         public ActionResult About()

@@ -26,6 +26,7 @@
                 <li>@Html.ActionLink("Запрос на склад", "StoreRequest", "Chief")</li>
                 <li class="active">@Html.ActionLink("Выдача инвентаря", "ItemExtradition", "Chief")</li>
                 <li>@Html.ActionLink("Статус заказов", "OrderStatus", "Chief")</li>
+                <li>@Html.ActionLink("Назначение инвентаря", "SendItem", "Chief")</li>
             </ul>
             <form class="navbar-form navbar-right" role="form" method="get" action="/Account/LogOff">
                 <button type="submit" class="btn btn-success">Выйти</button>
@@ -49,7 +50,7 @@
                                 <select class="form-control" id="sel" name="Id" onchange='show()' required="">
                                  
                                
-                                    @foreach (var order in Model.Orders.Where(i => i.Status == Model.Statuses.FirstOrDefault(j => j.Name == "Ожидает назначения")))
+                                    @foreach (var order in Model.Orders.Where(i => i.Status == Model.Statuses.FirstOrDefault(j => j.Name == "Waiting for appointment")))
                                     {
                                         <option value="@order.Id">@order.Text</option>
 

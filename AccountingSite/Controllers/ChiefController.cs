@@ -17,9 +17,12 @@ namespace AccountingSite.Controllers
         public ActionResult OrderStatus()
         {
             string login = UserIdentity.GetUser(User.Identity.Name).Login;
-            return View(db.Orders.Where(i => i.From.Login ==  login|| i.To.Login == login)
-                .Include(i => i.Status)
-                .Include(i => i.Employee));
+            //return View(db.Orders.Where(i => i.From.Login ==  login|| i.To.Login == login)
+            //    .Include(i => i.Status)
+            //    .Include(i => i.Employee));
+            return View(db.Orders.Where(i => i.From.Login == login || i.To.Login == login)
+               .Include(i => i.Status)
+               );
         }
 
         [HttpGet]
@@ -37,8 +40,8 @@ namespace AccountingSite.Controllers
                 To = db.Employees.FirstOrDefault(i => i.Name == db.Employees.FirstOrDefault(j => j.Name == to).Name),
                 Text = text,
                 Date = DateTime.Now,
-                Status = db.Statuses.FirstOrDefault(i => i.Name == "Отправлен на склад"),
-                Employee = null
+                Status = db.Statuses.FirstOrDefault(i => i.Name == "Sent to the warehouse"),
+               // Employee = null
             };
 
             db.Orders.Add(order);
@@ -71,14 +74,53 @@ namespace AccountingSite.Controllers
         {
             var order = db.Orders.Find(Id);
             var employee = db.Employees.Find(To);
-            order.Employee = employee;
+            // order.Employee = employee;
+            order.EmployeeId = employee.Id;
             order.From = db.Employees.FirstOrDefault(i => i.Login == User.Identity.Name);
             order.To = employee;
-            order.Status = db.Statuses.FirstOrDefault(i => i.Name == "Назначено");
+            order.Status = db.Statuses.FirstOrDefault(i => i.Name == "Assigned to");
             order.Date = DateTime.Now;
             ViewBag.Message = "Успешно добавлено!";
             db.SaveChanges();
             return View(db);
+        }
+
+
+        [HttpGet]
+        public ActionResult SendItem()
+        {
+            var listItem = new List<ItemTransaction>();
+            var orders = db.Orders.Where(i => i.Status == db.Statuses.FirstOrDefault(j => j.Name == "Waiting for appointment")).Include(i=>i.ItemTransactions);
+            foreach(var order in orders)
+            {
+                listItem.AddRange(order.ItemTransactions);
+            }
+            var result = new SendItem();
+            result.ItemTransaction = listItem;
+            result.Employee = db.Employees.Where(i => i.Role == db.Roles.FirstOrDefault(j => j.Name == "Engineer")).ToList();
+            return View(result);
+        }
+
+        [HttpPost]
+        public ActionResult SendItem(int[] itemId, int employeeId)
+        {
+            foreach(var id in itemId)
+            {
+                var newOrder = new Order()
+                {
+                    Date = DateTime.Now,
+                    From = db.Employees.FirstOrDefault(i => i.Login == User.Identity.Name),
+                    To = db.Employees.Find(employeeId),
+                    Text = "",
+                    Status = db.Statuses.FirstOrDefault(i => i.Name == "Assigned to"),
+                    EmployeeId = employeeId
+                };
+                db.Orders.Add(newOrder);
+                db.ItemTransactions.Find(id).Order = newOrder;
+            }
+
+            db.SaveChanges();
+            return RedirectToAction("SendItem");
         }
     }
 }

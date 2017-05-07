@@ -12,6 +12,11 @@ namespace AccountingSite.Models
         public int Id { get; set; }
 
 
+        public int EmployeeId { get; set; }
+
+        //public Employee Employee { get; set; }
+
+
         public int FromId { get; set; }
 
 
@@ -27,9 +32,9 @@ namespace AccountingSite.Models
 
         public DateTime Date { get; set; }
 
-        public Employee Employee { get; set; }
+       
 
-        public ICollection<ItemTransaction> ItemTransactions { get; set; }
+        public virtual ICollection<ItemTransaction> ItemTransactions { get; set; }
 
 
         public Order()

@@ -48,7 +48,7 @@
                                 
 
                                @{
-                                   foreach (var order in Model.Orders.Where(i=>i.Status.Name== "Назначено"))
+                                   foreach (var order in Model.Orders.Where(i=>i.Status.Name== "Assigned to"))
                                    {
                                     <option value="@order.Id">@order.Text</option>
                                    }
@@ -62,8 +62,8 @@
                         <label>Причина возврата:</label>
                         <div class="dropdown">
                             <select class="form-control" name="Reason" required="">
-                                <option value="Брак отправка">Брак</option>
-                                <option value="Отсутствие потребности">Отсутствие потребности</option>
+                                <option value="Marriage dispatch">Брак</option>
+                                <option value="Lack of need">Lack of need</option>
                             </select>
                         </div>
                     </div>

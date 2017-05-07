@@ -16,7 +16,8 @@ namespace AccountingSite.Controllers
         // GET: Engineer
         public ActionResult ListOrders()
         {
-            return View(db.Orders.Where(i=>i.Employee.Login==User.Identity.Name&&i.Status.Name== "Назначено").Include(i => i.ItemTransactions));
+            //return View(db.Orders.Where(i=>i.Employee.Login==User.Identity.Name&&i.Status.Name== "Assigned to").Include(i => i.ItemTransactions));
+            return View(db.Orders.Where(i => i.EmployeeId == db.Employees.FirstOrDefault(j=>j.Login==User.Identity.Name).Id && i.Status.Name == "Assigned to").Include(i => i.ItemTransactions));
         }
 
         [HttpGet]
@@ -34,7 +35,7 @@ namespace AccountingSite.Controllers
             order.To = db.Employees.Find(To);
             order.Status = db.Statuses.FirstOrDefault(i => i.Name == Reason);
             order.Date = DateTime.Now;
-            order.Employee = null;
+            //order.Employee = null;
             db.SaveChanges();
             ViewBag.Message = "Отправлено";
             return View(db);
