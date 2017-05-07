@@ -60,6 +60,7 @@ namespace AccountingSite.Controllers
 
             db.SaveChanges();
             ViewBag.Message = "Успешно добавлено!";
+            Writer.Write(order, User.Identity.Name, Server.MapPath("~/Files/"));
             return View(db);
         }
 
@@ -82,6 +83,7 @@ namespace AccountingSite.Controllers
             order.Date = DateTime.Now;
             ViewBag.Message = "Успешно добавлено!";
             db.SaveChanges();
+            Writer.Write(order, User.Identity.Name, Server.MapPath("~/Files/"));
             return View(db);
         }
 
@@ -117,9 +119,11 @@ namespace AccountingSite.Controllers
                 };
                 db.Orders.Add(newOrder);
                 db.ItemTransactions.Find(id).Order = newOrder;
+                Writer.Write(newOrder, User.Identity.Name, Server.MapPath("~/Files/"));
             }
 
             db.SaveChanges();
+            
             return RedirectToAction("SendItem");
         }
     }

@@ -38,6 +38,7 @@ namespace AccountingSite.Controllers
             //order.Employee = null;
             db.SaveChanges();
             ViewBag.Message = "Отправлено";
+            Writer.Write(order, User.Identity.Name, Server.MapPath("~/Files/"));
             return View(db);
         }
     }

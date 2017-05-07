@@ -60,6 +60,7 @@ namespace AccountingSite.Controllers
 
             order.To = db.Employees.Find(order.FromId);
             order.From = db.Employees.FirstOrDefault(i => i.Login == User.Identity.Name);
+            Writer.Write(order, User.Identity.Name, Server.MapPath("~/Files/"));
             db.SaveChanges();
             return View(db.Orders.Where(i => i.To.Login == User.Identity.Name && i.Status.Name == "Sent to the warehouse").Include(i => i.ItemTransactions).Include(i => i.From).Include(i => i.Status).Include(i => i.To));
         }
@@ -70,6 +71,7 @@ namespace AccountingSite.Controllers
             Order order = db.Orders.FirstOrDefault(i=>i.Id==id);
             order.Status = db.Statuses.FirstOrDefault(i=>i.Name=="Recycled");
             db.SaveChanges();
+            Writer.Write(order, User.Identity.Name, Server.MapPath("~/Files/"));
             return RedirectToRoute(new { controller = "Manager", action = "ListReturnItem" });
         }
 
@@ -85,6 +87,7 @@ namespace AccountingSite.Controllers
 
             }
             db.SaveChanges();
+            Writer.Write(order, User.Identity.Name, Server.MapPath("~/Files/"));
             return RedirectToRoute(new { controller = "Manager", action = "ListReturnItem" });
         }
     }
