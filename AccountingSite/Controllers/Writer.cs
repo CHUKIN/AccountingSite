@@ -38,32 +38,29 @@ namespace AccountingSite.Controllers
                     switch (sel.Type)
                     {
                         case Word.WdSelectionType.wdSelectionIP:
-                            sel.TypeText("Дата: "+order.Date.ToString());
+                            sel.TypeText(order.Date.ToString());
                             sel.TypeParagraph();
 
-                            sel.TypeText("От кого: "+order.From.Name);
+                            sel.TypeText(order.From.Name);
                             sel.TypeParagraph();
 
-                            sel.TypeText("Кому: "+order.To.Name);
+                            sel.TypeText(order.Id.ToString());
                             sel.TypeParagraph();
 
-                            sel.TypeText("Номер документа: "+order.Id.ToString());
+                            sel.TypeText(order.Status.Name);
                             sel.TypeParagraph();
 
-                            sel.TypeText("Текщее состояние документу: "+order.Status.Name);
+                            sel.TypeText(order.Text);
                             sel.TypeParagraph();
 
-                            sel.TypeText("Описание документа: "+order.Text);
+                            sel.TypeText(order.To.Name);
                             sel.TypeParagraph();
 
-
-                            sel.TypeText("Инвентарь: ");
-                            sel.TypeParagraph();
-                            foreach (var item in order.ItemTransactions)
+                            foreach(var item in order.ItemTransactions)
                             {
-                                sel.TypeText("Название: "+item.Name);
+                                sel.TypeText(item.Name);
                                 sel.TypeParagraph();
-                                sel.TypeText("Количество: "+item.Count.ToString());
+                                sel.TypeText(item.Count.ToString());
                                 sel.TypeParagraph();
                             }
                             break;
