@@ -50,7 +50,16 @@ namespace AccountingSite.Models
             };
             db.Roles.Add(engineer);
 
-
+            Department department = new Department()
+            {
+                Name = "Kaznacheystva"
+            };
+            db.Departments.Add(department);
+            Department department2 = new Department()
+            {
+                Name = "Snabgheniya"
+            };
+            db.Departments.Add(department2);
 
             Employee adminEmployee = new Employee()
             {
@@ -58,7 +67,8 @@ namespace AccountingSite.Models
                  Age=10,
                   Login="admin",
                    Password="admin",
-                    Role=admin
+                    Role=admin,
+                     Department=department
             };
             db.Employees.Add(adminEmployee);
             Employee chiefEmployee = new Employee()
@@ -67,7 +77,8 @@ namespace AccountingSite.Models
                 Age = 10,
                 Login = "chief",
                 Password = "chief",
-                Role = chief
+                Role = chief,
+                 Department=department2
             };
             db.Employees.Add(chiefEmployee);
             Employee managerEmployee = new Employee()
@@ -76,7 +87,8 @@ namespace AccountingSite.Models
                 Age = 10,
                 Login = "manager",
                 Password = "manager",
-                Role = manager
+                Role = manager,
+                 Department=department
             };
             db.Employees.Add(managerEmployee);
             Employee engineerEmployee = new Employee()
@@ -85,7 +97,8 @@ namespace AccountingSite.Models
                 Age = 10,
                 Login = "engineer",
                 Password = "engineer",
-                Role = engineer
+                Role = engineer,
+                Department=department2
             };
             db.Employees.Add(engineerEmployee);
 

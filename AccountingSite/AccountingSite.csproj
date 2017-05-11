@@ -163,9 +163,9 @@
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\Writer.cs" />
-    <Compile Include="Migrations\201705050618267_1.cs" />
-    <Compile Include="Migrations\201705050618267_1.Designer.cs">
-      <DependentUpon>201705050618267_1.cs</DependentUpon>
+    <Compile Include="Migrations\201705112147565_1.cs" />
+    <Compile Include="Migrations\201705112147565_1.Designer.cs">
+      <DependentUpon>201705112147565_1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\SendItem.cs" />
@@ -257,10 +257,10 @@
     <Content Include="Views\Items\Delete.cshtml" />
     <Content Include="Views\Items\Edit.cshtml" />
     <Content Include="Views\Items\Index.cshtml" />
-    <Content Include="Views\Employees\Create.cshtml" />
-    <Content Include="Views\Employees\Delete.cshtml" />
-    <Content Include="Views\Employees\Edit.cshtml" />
-    <Content Include="Views\Employees\Index.cshtml" />
+    <Content Include="Views\Employees2\Create.cshtml" />
+    <Content Include="Views\Employees2\Delete.cshtml" />
+    <Content Include="Views\Employees2\Edit.cshtml" />
+    <Content Include="Views\Employees2\Index.cshtml" />
     <Content Include="Views\Chief\SendItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -278,8 +278,8 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705050618267_1.resx">
-      <DependentUpon>201705050618267_1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705112147565_1.resx">
+      <DependentUpon>201705112147565_1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
