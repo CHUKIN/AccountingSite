@@ -25,7 +25,7 @@ namespace AccountingSite.Models
         }
     }
 
-    class MyContextInitializer : CreateDatabaseIfNotExists <ManageContext>
+    class MyContextInitializer : DropCreateDatabaseAlways <ManageContext>
     {
         protected override void Seed(ManageContext db)
         {
@@ -89,14 +89,14 @@ namespace AccountingSite.Models
             };
             db.Employees.Add(engineerEmployee);
 
-            db.Statuses.Add(new Status() { Name = "Waiting for appointment" });
-            db.Statuses.Add(new Status() { Name = "Assigned to" });
-            db.Statuses.Add(new Status() { Name = "Sent to the warehouse" });
-            db.Statuses.Add(new Status() { Name = "Lack of need" });
-            db.Statuses.Add(new Status() { Name = "Marriage dispatch" });
-            db.Statuses.Add(new Status() { Name = "Renouncement" });
-            db.Statuses.Add(new Status() { Name = "Recycled" });
-            db.Statuses.Add(new Status() { Name = "Returned" });
+            db.Statuses.Add(new Status() { Name = "Waiting for appointment" }); //Ожидание назначения   (Директор должен назначить)
+            db.Statuses.Add(new Status() { Name = "Assigned to" });     //Назначено    (Директор назначил ответсвенного)
+            db.Statuses.Add(new Status() { Name = "Sent to the warehouse" });  //Отправка заявки на склад    (Директор отправил заявку на склад)
+            db.Statuses.Add(new Status() { Name = "Lack of need" });  //Возврат из-за отсутсвия необходимости в этом заказе   (Инженер отправляет на склад)
+            db.Statuses.Add(new Status() { Name = "Deffect dispatch" });   //Возврат заказа из-за брака   (Инженер отправляет на склад)
+            db.Statuses.Add(new Status() { Name = "Renouncement" });    //Отказ в отправке заказа со склада   (Звхоз отказал в заказе от директора)
+            db.Statuses.Add(new Status() { Name = "Recycled" });  //Списать заказ   (Завхоз "удаляет" заказ со всем инвентарём из системы)
+            db.Statuses.Add(new Status() { Name = "Returned" });  //Вернуть заказ на склад   *Завхоз добавляет к имеющемуся инвентарю на складе, инвентарь из заказа)
 
             db.SaveChanges();
             base.Seed(db);

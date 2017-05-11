@@ -9,16 +9,16 @@ namespace AccountingSite.Controllers
     public static class Writer
     {
 
-        public static void WriteCreate(Order order, string employee,string path)
-        {
-            var app = new Word.Application();
-            app.Visible = false;
-            var doc = app.Documents.Add();
-            var r = doc.Range();
-            r.Text =order.Text+" "+employee;
-            doc.SaveAs2($@"C:\1\{employee}{order.Id}.doc");
+        //public static void WriteCreate(Order order, string employee,string path)
+        //{
+        //    var app = new Word.Application();
+        //    app.Visible = false;
+        //    var doc = app.Documents.Add();
+        //    var r = doc.Range();
+        //    r.Text =order.Text+" "+employee;
+        //    doc.SaveAs2($@"C:\1\{employee}{order.Id}.doc");
 
-        }
+        //}
         public static void Write(Order order,string employee,string path)
         {
             Word.Application ap = new Word.Application();

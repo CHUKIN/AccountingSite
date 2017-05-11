@@ -104,7 +104,7 @@ namespace AccountingSite.Controllers
         }
 
         [HttpPost]
-        public ActionResult SendItem(int[] itemId, int employeeId)
+        public ActionResult SendItem(int[] itemId, int employeeId,string text)
         {
             foreach(var id in itemId)
             {
@@ -113,7 +113,7 @@ namespace AccountingSite.Controllers
                     Date = DateTime.Now,
                     From = db.Employees.FirstOrDefault(i => i.Login == User.Identity.Name),
                     To = db.Employees.Find(employeeId),
-                    Text = "",
+                    Text = text,
                     Status = db.Statuses.FirstOrDefault(i => i.Name == "Assigned to"),
                     EmployeeId = employeeId
                 };

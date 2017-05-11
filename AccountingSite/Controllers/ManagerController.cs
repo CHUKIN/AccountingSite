@@ -19,7 +19,7 @@ namespace AccountingSite.Controllers
         public ActionResult ListReturnItem()
         {
  
-            return View(db.Orders.Where(i=>i.To.Login==User.Identity.Name&&(i.Status.Name== "Lack of need" || i.Status.Name== "Marriage dispatch")).Include(j=>j.Status).Include(j => j.From).Include(j => j.To).Include(j => j.ItemTransactions));
+            return View(db.Orders.Where(i=>i.To.Login==User.Identity.Name&&(i.Status.Name== "Lack of need" || i.Status.Name== "Deffect dispatch")).Include(j=>j.Status).Include(j => j.From).Include(j => j.To).Include(j => j.ItemTransactions));
         }
 
         [HttpGet]
