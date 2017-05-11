@@ -84,7 +84,7 @@ namespace AccountingSite.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.DepartmentId = new SelectList(db.Departments, "Id", "Name", employee.Id);
+            ViewBag.DepartmentId = new SelectList(db.Departments, "Id", "Name", employee.DepartmentId);
             ViewBag.RoleId = new SelectList(db.Roles, "Id", "Name", employee.RoleId);
             return View(employee);
         }
@@ -97,19 +97,28 @@ namespace AccountingSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                Employee existEmployee = db.Employees.FirstOrDefault(i => i.Login == employee.Login);
-                if (existEmployee == null||employee.Login==existEmployee.Login)
-                {
-                    db.Entry(employee).State = EntityState.Modified;
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                else
+                Employee existEmployee = db.Employees.Find(employee.Id);
+                Employee checkForLogin = db.Employees.FirstOrDefault(i => i.Login == employee.Login);
+                if (employee.Login!=existEmployee.Login&&checkForLogin!=null)
                 {
                     ModelState.AddModelError("", "Пользователь с таким логином уже существует");
                 }
+                else
+                {
+
+
+                    //db.Entry(employee).State = EntityState.Modified;
+                    existEmployee.Age = employee.Age;
+                existEmployee.Login = employee.Login;
+                existEmployee.Password = employee.Password;
+                existEmployee.Name = employee.Name;
+                existEmployee.RoleId = employee.RoleId;
+                existEmployee.DepartmentId = employee.DepartmentId;
+                db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-            ViewBag.DepartmentId = new SelectList(db.Departments, "Id", "Name", employee.Id);
+            ViewBag.DepartmentId = new SelectList(db.Departments, "Id", "Name", employee.DepartmentId);
             ViewBag.RoleId = new SelectList(db.Roles, "Id", "Name", employee.RoleId);
             return View(employee);
         }
