@@ -119,10 +119,12 @@ namespace AccountingSite.Controllers
                 };
                 db.Orders.Add(newOrder);
                 db.ItemTransactions.Find(id).Order = newOrder;
+                ViewBag.Message = "Успешно добавлено!";
+                db.SaveChanges();
                 Writer.Write(newOrder, User.Identity.Name, Server.MapPath("~/Files/"));
             }
 
-            db.SaveChanges();
+            
             
             return RedirectToAction("SendItem");
         }

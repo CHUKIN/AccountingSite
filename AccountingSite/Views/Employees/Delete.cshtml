@@ -35,6 +35,11 @@
             <h3>Вы уверены, что хотите удалить?</h3>
             <div>
                 <hr>
+
+
+                @Html.ValidationSummary(true)
+
+
                 <dl class="dl-horizontal">
                     <dt>Роль</dt>
                     @*здесь что-то не так, роль не выводится*@
@@ -60,6 +65,11 @@
                     <dt>Возраст</dt>
                     <dd>
                         @Html.DisplayFor(model => model.Age)
+                    </dd>
+
+                    <dt>Отдел</dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Department.Name)
                     </dd>
 
                 </dl>

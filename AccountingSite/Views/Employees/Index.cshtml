@@ -43,6 +43,7 @@
                     <th>Пароль</th>
                     <th>Имя</th>
                     <th>Возраст</th>
+                    <th>Отдел</th>
                     <th></th>
                 </tr>
 
@@ -62,6 +63,9 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Age)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Department.Name)
                         </td>
                         <td>
                             @Html.ActionLink("Редактирование", "Edit", new { id=item.Id }) |

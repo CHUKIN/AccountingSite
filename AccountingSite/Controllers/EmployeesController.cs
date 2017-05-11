@@ -40,7 +40,7 @@ namespace AccountingSite.Controllers
         // GET: Employees/Create
         public ActionResult Create()
         {
-            ViewBag.Id = new SelectList(db.Departments, "Id", "Name");
+            ViewBag.DepartmentId = new SelectList(db.Departments, "Id", "Name");
             ViewBag.RoleId = new SelectList(db.Roles, "Id", "Name");
             return View();
         }
@@ -49,16 +49,25 @@ namespace AccountingSite.Controllers
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create([Bind(Include = "Id,Login,Password,Name,Age,RoleId")] Employee employee)
+        public ActionResult Create([Bind(Include = "Id,Login,Password,Name,Age,RoleId,DepartmentId")] Employee employee)
         {
             if (ModelState.IsValid)
             {
-                db.Employees.Add(employee);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                Employee existEmployee = db.Employees.FirstOrDefault(i=>i.Login==employee.Login);
+                if (existEmployee == null)
+                {
+                    db.Employees.Add(employee);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Пользователь с таким логином уже существует");
+                }
+                
             }
 
-            ViewBag.Id = new SelectList(db.Departments, "Id", "Name", employee.Id);
+            ViewBag.DepartmentId = new SelectList(db.Departments, "Id", "Name", employee.Id);
             ViewBag.RoleId = new SelectList(db.Roles, "Id", "Name", employee.RoleId);
             return View(employee);
         }
@@ -75,7 +84,7 @@ namespace AccountingSite.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Id = new SelectList(db.Departments, "Id", "Name", employee.Id);
+            ViewBag.DepartmentId = new SelectList(db.Departments, "Id", "Name", employee.Id);
             ViewBag.RoleId = new SelectList(db.Roles, "Id", "Name", employee.RoleId);
             return View(employee);
         }
@@ -84,15 +93,23 @@ namespace AccountingSite.Controllers
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "Id,Login,Password,Name,Age,RoleId")] Employee employee)
+        public ActionResult Edit([Bind(Include = "Id,Login,Password,Name,Age,RoleId,DepartmentId")] Employee employee)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(employee).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                Employee existEmployee = db.Employees.FirstOrDefault(i => i.Login == employee.Login);
+                if (existEmployee == null||employee.Login==existEmployee.Login)
+                {
+                    db.Entry(employee).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Пользователь с таким логином уже существует");
+                }
             }
-            ViewBag.Id = new SelectList(db.Departments, "Id", "Name", employee.Id);
+            ViewBag.DepartmentId = new SelectList(db.Departments, "Id", "Name", employee.Id);
             ViewBag.RoleId = new SelectList(db.Roles, "Id", "Name", employee.RoleId);
             return View(employee);
         }
@@ -104,7 +121,7 @@ namespace AccountingSite.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Where(i => i.Id == id).Include(i => i.Role).FirstOrDefault();
+            Employee employee = db.Employees.Where(i => i.Id == id).Include(i => i.Role).Include(i=>i.Department).FirstOrDefault();
             if (employee == null)
             {
                 return HttpNotFound();
@@ -117,9 +134,18 @@ namespace AccountingSite.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Employee employee = db.Employees.Find(id);
-            db.Employees.Remove(employee);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (employee.Role.Name == "Admin"&&db.Employees.Where(i=>i.Role.Name=="Admin").Count()==1)
+            {
+                ModelState.AddModelError("", "Нельзя удалить единственного администратора");
+               
+            }
+            else
+            {
+                db.Employees.Remove(employee);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(employee);
         }
 
         protected override void Dispose(bool disposing)

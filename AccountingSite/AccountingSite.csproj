@@ -167,6 +167,10 @@
     <Compile Include="Migrations\201705112147565_1.Designer.cs">
       <DependentUpon>201705112147565_1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705112224018_2.cs" />
+    <Compile Include="Migrations\201705112224018_2.Designer.cs">
+      <DependentUpon>201705112224018_2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\SendItem.cs" />
     <Compile Include="Patterns\Bridge.cs" />
@@ -257,10 +261,10 @@
     <Content Include="Views\Items\Delete.cshtml" />
     <Content Include="Views\Items\Edit.cshtml" />
     <Content Include="Views\Items\Index.cshtml" />
-    <Content Include="Views\Employees2\Create.cshtml" />
-    <Content Include="Views\Employees2\Delete.cshtml" />
-    <Content Include="Views\Employees2\Edit.cshtml" />
-    <Content Include="Views\Employees2\Index.cshtml" />
+    <Content Include="Views\Employees\Create.cshtml" />
+    <Content Include="Views\Employees\Delete.cshtml" />
+    <Content Include="Views\Employees\Edit.cshtml" />
+    <Content Include="Views\Employees\Index.cshtml" />
     <Content Include="Views\Chief\SendItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -280,6 +284,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705112147565_1.resx">
       <DependentUpon>201705112147565_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705112224018_2.resx">
+      <DependentUpon>201705112224018_2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

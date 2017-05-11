@@ -3,7 +3,7 @@
     if (ViewBag.Message == "Успешно добавлено!")
     {
         <script>
-            alert("Успешно добавлено!");
+            alert("Успешно назначено!");
         </script>
     }
 }
@@ -63,7 +63,7 @@
                                             <tr>
                                                 <td>
                                                     <div class="checkbox">
-                                                        <label><input type="checkbox" name="itemId" value="@item.Id"></label>
+                                                        <label><input type="checkbox"  name="itemId" value="@item.Id"></label>
                                                     </div>
                                                 </td>
                                                 <td>@item.Name</td>
@@ -95,6 +95,7 @@
                             </div>
                             <br>
                         </div>
+                        <br><br><br>
 
 
                         <div class="form-group">
@@ -104,14 +105,22 @@
                                     @{
                                         foreach (var employee in Model.Employee)
                                         {
-                                            <option value="@employee.Id">@employee.Name</option>
+                                            <option value="@employee.Id">@employee.Name </option>
                                         }
                                     }
 
                                 </select>
                             </div>
                         </div>
-                        <button class="btn btn-primary" type="submit">Отправить</button>
+
+                        @{
+                            if (Model.ItemTransaction.Count != 0)
+                            {
+                                <button class="btn btn-primary" type="submit">Отправить</button>
+                            }
+                        }
+
+                        
                         <br><br>
                     </form>
                 </div>

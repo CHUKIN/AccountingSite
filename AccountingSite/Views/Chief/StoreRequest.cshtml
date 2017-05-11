@@ -82,7 +82,7 @@
                                 @{
                                     foreach (var to in Model.Employees.Where(i => i.Role == Model.Roles.FirstOrDefault(j => j.Name == "Manager")))
                                     {
-                                        <option>@to.Name</option>
+                                        <option>@to.Name </option>
                                     }
                                 }
 
